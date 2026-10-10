@@ -68,7 +68,7 @@ class ConsultorioOdontologico:
                 break
             print("Opción inválida. Seleccione un número de 1 a 2.")
 
-      # Registro guiado de Fecha de la Cita con validación 
+        # Registro guiado de Fecha de la Cita con validación
         fecha_hoy = datetime.date.today()
         print(f"\n--- FECHA DE LA CITA (Hoy es {fecha_hoy.strftime('%d/%m/%Y')}) ---")
         
@@ -116,6 +116,8 @@ class ConsultorioOdontologico:
         print(f"\n¡Cliente {nombre} registrado en la agenda diaria con éxito!")
 
     def atender_siguiente_contingencia(self):
+        # Reconstruimos la pila para que refleje el estado actual de los clientes
+        self.pila_contingencia.construir_pila_desde_lista(self.lista_general)
         siguiente = self.pila_contingencia.peek()
         if siguiente:
             print(f"\n[Siguiente en contingencia - Peek]: {siguiente.nombre} (Cédula: {siguiente.cedula}) | Fecha: {siguiente.fecha_str}")
@@ -170,7 +172,6 @@ def main():
         elif opcion == "4":
             sistema.procesar_pila_contingencia()
         elif opcion == "5":
-            sistema.pila_contingencia.construir_pila_desde_lista(sistema.lista_general)
             sistema.atender_siguiente_contingencia()
         elif opcion == "6":
             print("\n¡Gracias por utilizar el sistema!")
